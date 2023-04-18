@@ -13,7 +13,6 @@ import {
 export const Filter = () => {
   const filter = useSelector(selectFilter);
   const contacts = useSelector(selectContacts);
-  console.log(contacts);
   const dispatch = useDispatch();
 
   const getFilteredContacts = event => {

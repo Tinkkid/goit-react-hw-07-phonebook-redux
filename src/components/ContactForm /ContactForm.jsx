@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContacts } from 'redux/contactsOperation';
 import { selectContacts } from 'redux/selectors';
-import { nanoid } from 'nanoid';
 import Swal from 'sweetalert2';
 import { FiUser, FiPhone } from 'react-icons/fi';
 import {
@@ -39,7 +38,6 @@ export const ContactForm = () => {
     event.preventDefault();
 
     const contact = {
-      id: nanoid(),
       name,
       number,
     };
@@ -48,11 +46,11 @@ export const ContactForm = () => {
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
 
-    // const dublicateOfNumber = contacts.some(
-    //   contact =>
-    //     contact.number.replace(/-/g, '').replace(/ /g, '') ===
-    //     number.replace(/ /g, '').replace(/-/g, '')
-    // );
+    const dublicateOfNumber = contacts.some(
+      contact =>
+        contact.number.replace(/-/g, '').replace(/ /g, '') ===
+        number.replace(/ /g, '').replace(/-/g, '')
+    );
 
     if (dublicateOfName) {
       Swal.fire(`${name} is alredy in contacts`);
@@ -61,12 +59,12 @@ export const ContactForm = () => {
       return false;
     }
 
-    // if (dublicateOfNumber) {
-    //   Swal.fire(`${number} is alredy in contacts`);
-    //   setName('');
-    //   setNumber('');
-    //   return false;
-    // }
+    if (dublicateOfNumber) {
+      Swal.fire(`${number} is alredy in contacts`);
+      setName('');
+      setNumber('');
+      return false;
+    }
 
     dispatch(addContacts(contact));
     setName('');

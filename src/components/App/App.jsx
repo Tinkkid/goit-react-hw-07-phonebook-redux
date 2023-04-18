@@ -6,6 +6,7 @@ import { Filter } from 'components/Filter/Filter';
 import { MainSection, ContactsTitle, Title } from './App.styled';
 import { fetchContacts } from 'redux/contactsOperation';
 import { selectError, selectIsLoading } from 'redux/selectors';
+import { Loader } from 'components/Loader/Loader';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ export const App = () => {
       <Title>Phonebook</Title>
       <ContactForm />
       <ContactsTitle>Contacts</ContactsTitle>
-      {isLoading && !error && <b>Request in progress...</b>}
+      {isLoading && !error && <Loader />}
       <Filter />
       <ContactList />
     </MainSection>
